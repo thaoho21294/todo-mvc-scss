@@ -35,6 +35,12 @@ export class TodoService {
     this.updateLocalStorage()
   }
 
+  updateTodo(todo: Todo) {
+    const foundIndex = this.todos.findIndex(item => item.id === todo.id);
+    this.todos[foundIndex] = todo;
+    this.updateLocalStorage();
+  }
+
   updateLocalStorage() {
     this.storageService.setObject(TodoService.TodoStorageKey, this.todos);
     this.filterTodos(this.currentFilter, false);
