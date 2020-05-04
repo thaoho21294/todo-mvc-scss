@@ -8,13 +8,15 @@ import { map } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  implements OnInit{
+export class AppComponent  implements OnInit {
   hasTodo$: Observable<boolean>
+  length$: Observable<number>
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
     this.todoService.fetchFromLocalStorage();
     this.hasTodo$ = this.todoService.length$.pipe(map( length => length > 0));
+    this.length$ = this.todoService.length$;
   }
 }
